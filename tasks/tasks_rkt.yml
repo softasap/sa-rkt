@@ -1,0 +1,24 @@
+---
+- name: coreos rkt | Check if package is installed
+  command: dpkg-query -W rkt
+  register: rkt_check_deb
+  become: yes
+  failed_when: rkt_check_deb.rc > 1
+  changed_when: rkt_check_deb.rc == 1
+  tags:
+    -rkt
+
+- name: coreos rkt | Download package
+  get_url: url="https://github.com/coreos/rkt/releases/download/v{{rkt_version | default('1.25.0')}}/rkt_{{rkt_version | default('1.25.0')}}-1_amd64.deb" dest="/tmp/rkt.deb"
+  when: rkt_check_deb.rc == 1
+  tags:
+    -rkt
+
+- name: coreos rkt  | Install package
+  apt: deb="/tmp/rkt.deb"
+  become: true
+  when: rkt_check_deb.rc == 1
+  tags:
+    -rkt
+
+    
