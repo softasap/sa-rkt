@@ -24,7 +24,7 @@ Advanced:
 
     - {
         role: "sa-rkt",
-        rkt_version: 
+        rkt_version: "1.25.0"
       }
 
 ```
