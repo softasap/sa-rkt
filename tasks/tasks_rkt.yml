@@ -9,7 +9,7 @@
     -rkt
 
 - name: coreos rkt | Download package
-  get_url: url="https://github.com/coreos/rkt/releases/download/v{{rkt_version | default('1.25.0')}}/rkt_{{rkt_version | default('1.25.0')}}-1_amd64.deb" dest="/tmp/rkt.deb"
+  get_url: url="https://github.com/coreos/rkt/releases/download/v{{ rkt_version | default('1.25.0')}}/rkt_{{rkt_version | default('1.25.0') }}-1_amd64.deb" dest="/tmp/rkt.deb"
   when: rkt_check_deb.rc == 1
   tags:
     -rkt
